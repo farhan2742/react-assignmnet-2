@@ -8,8 +8,49 @@ import { Card, Col, Row } from 'antd';
 function App() {
   const [userData, setUserData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
-  const [cards, setCards] = React.useState([])
+  const [cards, setCards] = React.useState([]);
 
+  const deleteUser = (id) => {
+    setUserData((prevState) => {
+      const users = prevState.users.filter(user => user.id !== id)
+      console.log(users)
+      return {
+        users: users
+      }
+    })
+  };
+
+  const updateUser = (id, data) => {
+    console.log(id, data)
+    setUserData((prevState) => {
+      const users = prevState.users.map((user) => {
+        if (user.id === id) {
+          const userUpdated = {
+            ...user,
+            ...data
+          }
+          return userUpdated
+        }
+        else {
+          return user;
+        }  
+          
+      });
+      return {
+        users: users
+      }
+    })
+  };
+
+
+  // const updateUser = (id, data) => {
+  //   setUserData((prevState) => ({
+  //     prevState.users.map((user) => {
+  //       if (user.id === id) return { ...user, ...data };
+  //       return user;
+  //     }),
+  //   }));
+  // };
   
 
   React.useEffect(() => {
@@ -18,7 +59,7 @@ function App() {
         setUserData(prev => {
           return {
             ...prev,
-            Users: response.data
+            users: response.data
           }
         });
         setLoading(false);
@@ -30,10 +71,10 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if (userData.Users !== undefined) {
-      setCards(() => {
-        const users = userData.Users.map(user => (
-          <UserCard user={user}/>
+    if (userData.users !== undefined) {
+      setCards((prev) => {
+        const users = userData.users.map(user => (
+          <UserCard user={user} handleDelete={deleteUser} handleUpdate={updateUser} />
         ));
         return users;
       });
@@ -43,7 +84,7 @@ function App() {
   return (
     <Row gutter={[10, 24]} className='user-cards'>
       {loading ? <Progress /> : cards}
-      </Row>
+    </Row>
   );
 }
 

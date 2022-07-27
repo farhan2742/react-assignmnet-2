@@ -1,5 +1,10 @@
 @import '~antd/dist/antd.css';
 
+.app {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .progress {
   margin: 20px 0;
   margin-bottom: 20px;
@@ -17,6 +22,10 @@
   margin: auto;
 }
 
+.user--card {
+  margin: 15px;
+}
+
 .user-cards {
   display: flex;
   width: 100vw;
@@ -30,6 +39,16 @@
   outline: none;
 }
 
+.card-action-icon {
+  font-size: 1.2rem;
+}
+
 .card-action-like {
   color: red;
+}
+
+.user--card__info {
+  padding-top: 10px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
