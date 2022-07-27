@@ -62,7 +62,7 @@ npm run tests
 
 
 * [React JS](https://reactjs.org/) - Frontend Framework
-* [Meterial UI](https://mui.com/) - Frontend UI Framework
+* [Ant Design](https://ant.design/) - Frontend UI Framework
 * [Vercel (Formally Zeit)](https://vercel.com/) - For deployment
 * [Github](https://github.com/) - For Version Control
 
