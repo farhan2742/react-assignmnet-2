@@ -3,7 +3,7 @@ import './App.css';
 import Progress from './components/Progress';
 import UserCard from './components/UserCard';
 import axios from 'axios';
-import { Card, Col, Row } from 'antd';
+import { Row } from 'antd';
 
 function App() {
   const [userData, setUserData] = React.useState({});
@@ -41,16 +41,6 @@ function App() {
       }
     })
   };
-
-
-  // const updateUser = (id, data) => {
-  //   setUserData((prevState) => ({
-  //     prevState.users.map((user) => {
-  //       if (user.id === id) return { ...user, ...data };
-  //       return user;
-  //     }),
-  //   }));
-  // };
   
 
   React.useEffect(() => {
