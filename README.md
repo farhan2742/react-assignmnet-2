@@ -36,7 +36,7 @@ In order to properly setup your development environment and run this project fol
 ```
 * Start the application in development mode using the following commands
 ```bash
-	npm run dev
+	npm start
 ```
 
 ### Set up for deployment

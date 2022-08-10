@@ -13,17 +13,17 @@ import {
 
 const { Meta } = Card;
 
-const UserCard = (props) => {
+const UserCard = ({ user, handleDelete, handleUpdate }) => {
     const [like, setLike] = React.useState(false);
     const [model, setModel] = React.useState(false);
-    const [user, setUser] = React.useState({});
+    const [currentUser, setCurrentUser] = React.useState({});
 
     const handleLike = () => {
         setLike(!like);
     };
 
     const handleSubmit = (values) => {
-        props.handleUpdate(user.id, values);
+        handleUpdate(currentUser.id, values);
         toggleModal();
     };
 
@@ -34,14 +34,14 @@ const UserCard = (props) => {
     const [form] = Form.useForm();
 
     React.useEffect(() => {
-        setUser((prev) => ({
+        setCurrentUser((prev) => ({
             ...prev,
-            ...props.user,
+            ...user,
         }));
-    }, [props.user]);
+    }, [user]);
 
     return (
-        <React.Fragment key={user.username}>
+        <React.Fragment key={currentUser.username}>
             <Modal
                 visible={model}
                 title="Edit User"
@@ -69,7 +69,7 @@ const UserCard = (props) => {
                     <Form.Item
                         name="name"
                         label="Name"
-                        initialValue={user.name}
+                        initialValue={currentUser.name}
                         rules={[
                             {
                                 required: true,
@@ -82,7 +82,7 @@ const UserCard = (props) => {
                     <Form.Item
                         name="email"
                         label="Email"
-                        initialValue={user.email}
+                        initialValue={currentUser.email}
                         rules={[
                             {
                                 required: true,
@@ -99,7 +99,7 @@ const UserCard = (props) => {
                     <Form.Item
                         name="phone"
                         label="Phone"
-                        initialValue={user.phone}
+                        initialValue={currentUser.phone}
                         rules={[
                             {
                                 required: true,
@@ -112,7 +112,7 @@ const UserCard = (props) => {
                     <Form.Item
                         name="website"
                         label="Website"
-                        initialValue={user.website}
+                        initialValue={currentUser.website}
                         rules={[
                             {
                                 required: true,
@@ -130,8 +130,8 @@ const UserCard = (props) => {
                     className="user--card"
                     cover={
                         <img
-                            alt={user.username}
-                            src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`}
+                            alt={currentUser.username}
+                            src={`https://avatars.dicebear.com/v2/avataaars/${currentUser.username}.svg?options[mood][]=happy`}
                             width={200}
                         />
                     }
@@ -157,7 +157,7 @@ const UserCard = (props) => {
                         </button>,
                         <button
                             onClick={() => {
-                                props.handleDelete(user.id);
+                                handleDelete(currentUser.id);
                             }}
                             className="card-action"
                         >
@@ -168,12 +168,12 @@ const UserCard = (props) => {
                         </button>,
                     ]}
                 >
-                    <Meta title={user.name} />
+                    <Meta title={currentUser.name} />
                     <div className="user--card__info">
                         <p>
-                            <MailOutlined /> {user.email} <br />
-                            <PhoneOutlined /> {user.phone} <br />
-                            <GlobalOutlined /> {user.website}
+                            <MailOutlined /> {currentUser.email} <br />
+                            <PhoneOutlined /> {currentUser.phone} <br />
+                            <GlobalOutlined /> {currentUser.website}
                         </p>
                     </div>
                 </Card>
