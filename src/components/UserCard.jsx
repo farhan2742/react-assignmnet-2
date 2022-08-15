@@ -1,5 +1,6 @@
-import * as React from "react";
-
+import React, { useEffect, useState } from "react";
+import propTypes from "prop-types";
+import defaultProps from "default-props";
 import { Card, Col, Modal, Form, Input } from "antd";
 import {
     HeartOutlined,
@@ -14,9 +15,9 @@ import {
 const { Meta } = Card;
 
 const UserCard = ({ user, handleDelete, handleUpdate }) => {
-    const [like, setLike] = React.useState(false);
-    const [model, setModel] = React.useState(false);
-    const [currentUser, setCurrentUser] = React.useState({});
+    const [like, setLike] = useState(false);
+    const [model, setModel] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
 
     const handleLike = () => {
         setLike(!like);
@@ -33,7 +34,7 @@ const UserCard = ({ user, handleDelete, handleUpdate }) => {
 
     const [form] = Form.useForm();
 
-    React.useEffect(() => {
+    useEffect(() => {
         setCurrentUser((prev) => ({
             ...prev,
             ...user,
@@ -180,6 +181,18 @@ const UserCard = ({ user, handleDelete, handleUpdate }) => {
             </Col>
         </React.Fragment>
     );
+};
+
+UserCard.propTypes = {
+    user: propTypes.object.isRequired,
+    handleDelete: propTypes.func.isRequired,
+    handleUpdate: propTypes.func.isRequired,
+};
+
+UserCard.defaultProps = defaultProps;
+
+UserCard.defaultProps = {
+    user: {},
 };
 
 export default UserCard;
